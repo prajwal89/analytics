@@ -2,17 +2,18 @@
 
 ## Installation
 
-- Register plugin in your admin panel
-- Publish js file `php artisan vendor:publish analytics-assets`
-- You can register `PageViewsTrendChart::class` in dashboard widgets,
-- You can register `PageViewsDoughnutChart::class` in dashboard widgets,
-- Download Geolite Database of location details with `php artisan analytics:sync-geolite-db-command`
-- Include this in your scheduler for updating the database periodically (every 15 days ideally).
-  
-  ```php
-      Schedule::command('analytics:sync-geolite-db-command')
-        ->withoutOverlapping()
-        ->twiceMonthly();
-  ```
+- Register the plugin in your admin panel.  
+- Publish the JavaScript file using: `php artisan vendor:publish --tag=analytics-assets`  
+- Register `PageViewsTrendChart::class` as a dashboard widget (optional).  
+- Register `PageViewsDoughnutChart::class` as a dashboard widget (optional).  
+- Download the GeoLite database required for location data of the users using:  
+  `php artisan analytics:sync-geolite-db-command`  
+- Add the following to your scheduler to update the database periodically (ideally every 30 days) (optional but recommended):
+
+```php
+Schedule::command('analytics:sync-geolite-db-command')
+    ->withoutOverlapping()
+    ->twiceMonthly();
+```
 
 ## Configuration
