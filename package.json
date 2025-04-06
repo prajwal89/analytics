@@ -1,0 +1,10 @@
+{
+    "name": "analytics",
+    "scripts": {
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "vite": "^5.0.0"
+    },
+    "type": "module"
+}
