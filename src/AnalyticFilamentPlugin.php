@@ -10,7 +10,7 @@ use Filament\Panel;
 use Prajwal89\Analytics\Filament\Resources\BiasResource;
 use Prajwal89\Analytics\Filament\Resources\PageViewResource;
 
-class AnalyticPlugin implements Plugin
+class AnalyticFilamentPlugin implements Plugin
 {
     public function getId(): string
     {
