@@ -7,7 +7,7 @@
 - exclude the route from csrf checking        
     ```php
     $middleware->validateCsrfTokens(except: [
-         '/api/an/*'
+         '/api/an'
     ]);
     ```
 - Register `PageViewsTrendChart::class` as a dashboard widget (optional).  

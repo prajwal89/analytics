@@ -82,7 +82,7 @@
         // Fallback when sendBeacon isn't available
         try {
             const xhr = new XMLHttpRequest();
-            xhr.open('POST', '/api/an/store', false); // Synchronous
+            xhr.open('POST', '/api/an', false); // Synchronous
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(analyticsData));
         } catch (e) {
