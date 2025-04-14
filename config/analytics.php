@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\Storage;
 use Prajwal89\Analytics\Services\DefaultModelRouteResolver;
 
 return [
@@ -15,7 +14,7 @@ return [
      * for syncing with latest database
      * run php artisan analytics:sync-geolite-db-command
      */
-    'geolite_db_path' => Storage::path('GeoLite2-City.mmdb'),
+    'geolite_db_path' => storage_path('GeoLite2-City.mmdb'),
 
     /**
      * Resolve route to its corresponding model
