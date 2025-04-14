@@ -1,6 +1,4 @@
-// IIFE to avoid global scope pollution
 (function () {
-    // Initialize tracking variables
     let state = {
         totalTimeSpent: 0,
         lastActiveTime: Date.now(),
@@ -8,7 +6,7 @@
         isCurrentlyHidden: false,
         hasBeaconSupport: 'sendBeacon' in navigator,
         // hasBeaconSupport: false,
-        csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         isUnloading: false
     };
 
@@ -92,7 +90,6 @@
 
     // Handle page unload
     function handleUnload() {
-        console.log('sending')
         if (state.isUnloading) return;
         state.isUnloading = true;
         sendAnalytics();
