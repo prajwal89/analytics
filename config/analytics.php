@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Prajwal89\Analytics\Services\DefaultModelRouteResolver;
 
 return [
-    'use_queue' => true,
+    'use_queue' => false,
     'queue_name' => 'low',
     'record_bias' => true,
 
