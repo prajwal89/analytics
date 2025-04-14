@@ -8,11 +8,9 @@
         isCurrentlyHidden: false,
         hasBeaconSupport: 'sendBeacon' in navigator,
         // hasBeaconSupport: false,
-        csrfToken: document.querySelector('meta[name="csrf-token"]')?.getAttribute('content'),
+        csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         isUnloading: false
     };
-
-    console.log(state)
 
     // Throttle function to limit execution frequency
     function throttle(func, limit) {
@@ -77,7 +75,7 @@
 
         // Use sendBeacon if available
         if (state.hasBeaconSupport) {
-            navigator.sendBeacon('/api/an/store', blob);
+            navigator.sendBeacon('/api/an', blob);
             return;
         }
 
@@ -86,9 +84,6 @@
             const xhr = new XMLHttpRequest();
             xhr.open('POST', '/api/an/store', false); // Synchronous
             xhr.setRequestHeader('Content-Type', 'application/json');
-            if (state.csrfToken) {
-                xhr.setRequestHeader('X-CSRF-Token', state.csrfToken);
-            }
             xhr.send(JSON.stringify(analyticsData));
         } catch (e) {
             console.error('Failed to send final analytics:', e);

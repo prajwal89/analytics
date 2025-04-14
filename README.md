@@ -4,6 +4,12 @@
 
 - Register the plugin in your admin panel.  
 - Publish the JavaScript file using: `php artisan vendor:publish --tag=analytics-assets`  
+- exclude the route from csrf checking        
+    ```php
+    $middleware->validateCsrfTokens(except: [
+         '/api/an/*'
+    ]);
+    ```
 - Register `PageViewsTrendChart::class` as a dashboard widget (optional).  
 - Register `PageViewsDoughnutChart::class` as a dashboard widget (optional).  
 - Download the GeoLite database required for location data of the users using:  
