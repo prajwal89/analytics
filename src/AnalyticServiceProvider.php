@@ -28,7 +28,10 @@ class AnalyticServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/analytics.php', 'analytics');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'analytics');
 
-        // php artisan vendor:publish analytics-assets
+        $this->publishes([
+            __DIR__ . '/../config/analytics.php' => config_path('analytics.php'),
+        ], 'analytics-config');
+
         $this->publishes([
             __DIR__ . '/../public/dist' => public_path('vendor/prajwal89/analytics'),
         ], 'analytics-assets');
