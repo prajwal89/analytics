@@ -7,6 +7,7 @@ namespace Prajwal89\Analytics\Filament\Resources;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
@@ -16,6 +17,7 @@ use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 use Prajwal89\Analytics\Enums\CountryCode;
 use Prajwal89\Analytics\Filament\Resources\PageViewResource\Pages;
 use Prajwal89\Analytics\Filament\Resources\PageViewResource\Pages\ListPageViews;
+use Prajwal89\Analytics\Filament\Resources\PageViewResource\Pages\PageAnalyticsPage;
 use Prajwal89\Analytics\Filament\Resources\PageViewResource\Widgets\PageViewsTrendChart;
 use Prajwal89\Analytics\Models\PageView;
 
@@ -100,10 +102,10 @@ class PageViewResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('device')
-                    ->options(fn () => ['' => 'Select Device'] + PageView::query()->distinct()->pluck('device', 'device')->toArray()),
+                    ->options(fn() => ['' => 'Select Device'] + PageView::query()->distinct()->pluck('device', 'device')->toArray()),
 
                 SelectFilter::make('browser')
-                    ->options(fn () => ['' => 'Select Browser'] + PageView::query()->distinct()->pluck('browser', 'browser')->toArray()),
+                    ->options(fn() => ['' => 'Select Browser'] + PageView::query()->distinct()->pluck('browser', 'browser')->toArray()),
 
                 SelectFilter::make('country_code')
                     ->options(CountryCode::class),
@@ -114,6 +116,12 @@ class PageViewResource extends Resource
                 // Tables\Actions\ViewAction::make(),
                 // Tables\Actions\EditAction::make(),
                 // Tables\Actions\DeleteAction::make(),
+                Action::make('analytics')
+                    ->icon('heroicon-o-chart-bar')
+                    // ->success()
+                    ->url(function ($record) {
+                        return self::getUrl('analytics');
+                    })
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -133,6 +141,7 @@ class PageViewResource extends Resource
     {
         return [
             'index' => ListPageViews::route('/'),
+            'analytics' => PageAnalyticsPage::route('/analytics')
             // 'create' => Pages\CreatePageView::route('/create'),
             // 'edit' => Pages\EditPageView::route('/{record}/edit'),
         ];
