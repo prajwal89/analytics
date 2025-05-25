@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 
 /**
- * php artisan analytics:sync-geolite-db-command
+ * php artisan analytics:sync-geolite-db
  *
  * @see https://github.com/P3TERX/GeoLite.mmdb
  */
 class SyncGeoLiteDbCommand extends Command
 {
-    protected $signature = 'analytics:sync-geolite-db-command';
+    protected $signature = 'analytics:sync-geolite-db';
 
     protected $description = 'Download and synchronize the GeoLite2 City database file';
 
