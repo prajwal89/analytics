@@ -12,9 +12,9 @@ return [
     /**
      * for getting county and city data.
      * for syncing with latest database
-     * run php artisan analytics:sync-geolite-db-command
+     * run php artisan analytics:sync-geolite-db
      */
-    'geolite_db_path' => storage_path('GeoLite2-City.mmdb'),
+    'geolite_db_path' => storage_path('app/private/GeoLite2-City.mmdb'),
 
     /**
      * Resolve route to its corresponding model
