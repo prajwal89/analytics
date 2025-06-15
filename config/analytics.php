@@ -23,6 +23,12 @@ return [
     'route_resolver' => DefaultModelRouteResolver::class,
 
     /**
+     * Middleware FQN
+     * You can use it to exclude the page views from specific users like admin,mod etc
+     */
+    'middleware' => null,
+
+    /**
      * for bias filament resource
      * add models with the searchable using here this will
      * be used to search biasable1 and biasable2

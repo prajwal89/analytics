@@ -17,10 +17,8 @@ class PageViewController
     use ApiResponser;
 
     // ! we are assuming that this request is made by the same user who visited it
-    public function store(Request $request)
+    public function __invoke(Request $request)
     {
-        // Log::info('track page view', ['request' => $request->all()]);
-
         $validator = Validator::make($request->all(), [
             'url' => 'required|string|url',
         ]);
@@ -66,7 +64,6 @@ class PageViewController
             );
         }
 
-        // return $this->successResponse($payload->toArray());
-        return $this->successResponse(isAdmin() ? $request->toArray() : []);
+        return $this->successResponse();
     }
 }
