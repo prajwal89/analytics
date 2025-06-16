@@ -104,10 +104,10 @@ class PageViewResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('device')
-                    ->options(fn() => ['' => 'Select Device'] + PageView::query()->distinct()->pluck('device', 'device')->toArray()),
+                    ->options(fn () => ['' => 'Select Device'] + PageView::query()->distinct()->pluck('device', 'device')->toArray()),
 
                 SelectFilter::make('browser')
-                    ->options(fn() => ['' => 'Select Browser'] + PageView::query()->distinct()->pluck('browser', 'browser')->toArray()),
+                    ->options(fn () => ['' => 'Select Browser'] + PageView::query()->distinct()->pluck('browser', 'browser')->toArray()),
 
                 SelectFilter::make('country_code')
                     ->options(CountryCode::class),
