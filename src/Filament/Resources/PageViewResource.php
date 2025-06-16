@@ -40,16 +40,15 @@ class PageViewResource extends Resource
     {
         return $table
             ->columns([
-                // Tables\Columns\TextColumn::make('id')
-                //     ->sortable()
-                //     ->searchable(),
-                TextColumn::make('path')
+                Tables\Columns\TextColumn::make('id')
                     ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('path')
                     ->searchable()
                     ->limit(30),
                 TextColumn::make('route_name')
                     ->label('Route')
-                    ->sortable()
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('country_code')
@@ -60,16 +59,21 @@ class PageViewResource extends Resource
                     //     }
                     //     return 'heroicon-o-flag';
                     // })
-                    ->sortable()
                     ->searchable(),
                 TextColumn::make('city')
                     ->label('City')
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('ip_address')
                     ->label('IP')
-                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable(),
+                TextColumn::make('referrer_url')
+                    ->label('Referrer')
+                    ->limit(32)
+                    ->tooltip(function ($record) {
+                        return $record->referrer_url;
+                    })
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 TextColumn::make('device')
@@ -100,10 +104,10 @@ class PageViewResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('device')
-                    ->options(fn () => ['' => 'Select Device'] + PageView::query()->distinct()->pluck('device', 'device')->toArray()),
+                    ->options(fn() => ['' => 'Select Device'] + PageView::query()->distinct()->pluck('device', 'device')->toArray()),
 
                 SelectFilter::make('browser')
-                    ->options(fn () => ['' => 'Select Browser'] + PageView::query()->distinct()->pluck('browser', 'browser')->toArray()),
+                    ->options(fn() => ['' => 'Select Browser'] + PageView::query()->distinct()->pluck('browser', 'browser')->toArray()),
 
                 SelectFilter::make('country_code')
                     ->options(CountryCode::class),
