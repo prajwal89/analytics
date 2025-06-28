@@ -144,7 +144,7 @@ class AnalyticService
         $dbPath = config('analytics.geolite_db_path');
 
         if (!File::exists($dbPath)) {
-            Log::info("GeoLite DB is not downloaded please run command 'php artisan analytics:sync-geolite-db-command'");
+            Log::info("GeoLite DB is not downloaded please run command 'php artisan analytics:sync-geolite-db'");
 
             return [];
         }
