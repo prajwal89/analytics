@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Uri;
+use Illuminate\Http\Request;
 use Prajwal89\Analytics\Events\NewPageViewEvent;
 use Prajwal89\Analytics\Interfaces\RouteModelResolverInterface;
 use Prajwal89\Analytics\Models\PageView;
@@ -41,18 +41,23 @@ class AnalyticService
             $modelData['viewable_type'] = get_class($model);
         }
 
-        $uri = Uri::of($url);
+        // Parse URL components using native PHP functions
+        $parsedUrl = parse_url($url);
+        $path = $parsedUrl['path'] ?? '/';
+        $queryParams = [];
+
+        if (isset($parsedUrl['query'])) {
+            parse_str($parsedUrl['query'], $queryParams);
+        }
 
         $pageView = PageView::query()->create($modelData
             + $analyticData
             + self::getLocationData($analyticData['ip_address'])
             + [
-                'path' => $uri->path(),
+                'path' => $path,
                 'route_name' => $currentRouteName,
                 ...$userId ? ['user_id' => $userId] : [],
-                ...$uri->query()->toArray() === []
-                    ? []
-                    : ['query_string' => $uri->query()->toArray()],
+                ...empty($queryParams) ? [] : ['query_string' => $queryParams],
             ]);
 
         if (config('analytics.record_bias')) {
