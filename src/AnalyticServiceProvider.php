@@ -15,8 +15,7 @@ class AnalyticServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(RouteModelResolverInterface::class, function ($app) {
-            // $resolverClass = config('analytics.route_resolver', DefaultRouteResolver::class);
-            $resolverClass = DefaultModelRouteResolver::class;
+            $resolverClass = config('analytics.route_resolver', DefaultModelRouteResolver::class);
 
             return new $resolverClass;
         });
