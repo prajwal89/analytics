@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Prajwal89\Analytics\Services;
 
-use App\Models\Bias;
 use GeoIp2\Database\Reader;
 use GeoIp2\Exception\AddressNotFoundException;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Prajwal89\Analytics\Events\NewPageViewEvent;
 use Prajwal89\Analytics\Interfaces\RouteModelResolverInterface;
+use Prajwal89\Analytics\Models\Bias;
 use Prajwal89\Analytics\Models\PageView;
 
 // todo fire page view event
