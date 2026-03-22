@@ -1,6 +1,6 @@
 {
     "name": "prajwal89/analytics",
-    "description": "inhouse analytics solution with filament pane",
+    "description": "in-house analytics solution with filament panel",
     "type": "library",
     "license": "MIT",
     "autoload": {
